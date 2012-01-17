@@ -1,1 +1,11 @@
 This repo contains scripts that I use to migrate music (flacs) into iTunes. Then I sync the iTunes folder to my phone.
+
+Usage is:
+  flac2mp3 /path/to/dir/containing/flacs
+  sync_music
+
+How it works:
+  flac2mp3 will generate mp3s from flac files and write the id3 tags to the generated mp3 files.
+  Then it dumps the mp3 files into the iTunes "Automatically Add to iTunes.localized" directory.
+
+There are a bunch of hard coded paths that you may want to check.

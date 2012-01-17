@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# flacmp3 - convert a flac file to mp3
+#
+TARGET_DIR="/Volumes/Music/Automatically Add to iTunes.localized"
+TMP_DIR="/tmp"
+if [ -d "$1" ]; then
+  pushd "$1"
+  for file in *.flac; do
+    echo "file is $file"
+    if [ -e "$file" ]; then
+      base_name_of_file=`basename "$file" .flac`
+      out_file="$TMP_DIR/${base_name_of_file}.mp3"
+      target_file="$TARGET_DIR/${base_name_of_file}.mp3"
+      flac -c -d "$file" | lame --noreplaygain -h -m s -b 192 - "$out_file"
+      /opt/music_management/cp_id3_tags "$file" "$out_file"
+    else
+      echo >&2 "No such file: "$1""
+      popd
+      exit 1
+    fi
+  done
+  /opt/music_management/apply_replay_gain "$TMP_DIR"
+  sudo rsync -av $TMP_DIR/*.mp3 "$TARGET_DIR"
+  sudo rm $TMP_DIR/*.mp3
+else
+  echo >&2 "Usage: "$(basename "$0")" INPUTFILE [...]"
+  popd
+  exit 1
+fi

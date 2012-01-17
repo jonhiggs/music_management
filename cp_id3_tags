@@ -1,0 +1,26 @@
+#!/usr/bin/python
+# expects an input file to fetch tags from, and an output file to write the tags to.
+
+import sys
+from mutagen.id3 import ID3
+from mutagen.easyid3 import EasyID3
+from mutagen.flac import FLAC
+from mutagen.mp3 import MP3
+
+dest = MP3(sys.argv[2])
+dest.add_tags(ID3=EasyID3)
+
+source = FLAC(sys.argv[1])
+#id3 = EasyID3(sys.argv[1])
+
+dest.delete()
+
+for key,value in source.items():
+  print key, value
+  if key != "comment" and key != "tracktotal" and key != "description":
+    dest[key] = value
+
+for key,value in dest.items():
+  print key, value
+
+dest.save()

@@ -17,7 +17,7 @@ dest.delete()
 
 for key,value in source.items():
   print key, value
-  if key != "comment" and key != "tracktotal" and key != "description":
+  if key != "comment" and key != "tracktotal" and key != "description" and key != "replaygain_reference_loudness":
     dest[key] = value
 
 for key,value in dest.items():

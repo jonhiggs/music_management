@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# mp3gain - Apply mp3gain information to all files in dir.
+#
+
+MP3GAIN='/usr/local/bin/mp3gain'
+OPTS='-s i -a'
+TARGET_DIR="$1"
+
+if [ -d "${TARGET_DIR}" ]; then
+  pushd "${TARGET_DIR}" &> /dev/null
+
+  # APPLY REPLAY GAIN TO MP3 FILES.
+  if [ `ls -1 | grep -c \.mp3` -ne 0 ]; then
+    ${MP3GAIN} ${OPTS} *.mp3
+  fi
+
+  popd &> /dev/null
+fi

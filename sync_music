@@ -1,2 +1,2 @@
 #!/bin/bash
-rsync -av --size-only --delete --exclude="Automatically Add to iTunes.localized" --exclude="*.pamp" --exclude="Unknown Artist" /Volumes/Music/* /Volumes/PHONE-SD/MUSIC/
+rsync -av --size-only --delete --exclude="Automatically Add to iTunes.localized" --exclude="*.pamp" --exclude="Unknown Artist" ${HOME}/Music/* /Volumes/PHONE-SD/MUSIC/

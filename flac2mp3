@@ -2,7 +2,7 @@
 #
 # flacmp3 - convert a flac file to mp3
 #
-TARGET_DIR="${HOME}/Music/Automatically Add to iTunes.localized"
+TARGET_DIR="/Volumes/HDD/iTunes/iTunes Media/Automatically Add to iTunes.localized"
 TMP_DIR="/tmp"
 if [ -d "$1" ]; then
   pushd "$1"

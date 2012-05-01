@@ -17,7 +17,7 @@ dest.delete()
 
 for key,value in source.items():
   print key, value
-  if key != "comment" and key != "tracktotal" and key != "description" and key != "replaygain_reference_loudness":
+  if key != "comment" and key != "tracktotal" and key != "description" and key != "replaygain_reference_loudness" and key != "publisher" and key != "gracenoteextdata" and key != "album artist" and key != "gracenotefileid" and key != "notes" and key != "totaldiscs" and key != "totaltracks" and key != "band":
     dest[key] = value
 
 for key,value in dest.items():

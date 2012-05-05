@@ -21,8 +21,8 @@ if [ -d "$1" ]; then
     fi
   done
   ${HOME}/Repos/music_management/apply_replay_gain "$TMP_DIR"
-  sudo rsync -av $TMP_DIR/*.mp3 "$TARGET_DIR"
-  sudo rm $TMP_DIR/*.mp3
+  rsync -av $TMP_DIR/*.mp3 "$TARGET_DIR"
+  rm $TMP_DIR/*.mp3
 else
   echo >&2 "Usage: "$(basename "$0")" INPUTFILE [...]"
   exit 1

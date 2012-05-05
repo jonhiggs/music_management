@@ -4,6 +4,9 @@
 #
 TARGET_DIR="/Volumes/HDD/iTunes/iTunes Media/Automatically Add to iTunes.localized"
 TMP_DIR="/tmp"
+
+rm -f ${TMP_DIR}/*.mp3
+
 if [ -d "$1" ]; then
   pushd "$1"
   for file in *.flac; do

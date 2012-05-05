@@ -25,6 +25,5 @@ if [ -d "$1" ]; then
   sudo rm $TMP_DIR/*.mp3
 else
   echo >&2 "Usage: "$(basename "$0")" INPUTFILE [...]"
-  popd
   exit 1
 fi

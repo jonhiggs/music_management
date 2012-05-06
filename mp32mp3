@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# mp32mp3 - convert a mp3 file with unknown id3 tags to an mp3 with known id3 tags.
+#
+TARGET_DIR="/Volumes/HDD/iTunes/iTunes Media/Automatically Add to iTunes.localized"
+TMP_DIR="/tmp"
+
+rm -f ${TMP_DIR}/*.mp3
+
+if [ -d "$1" ]; then
+  pushd "$1"
+  for file in *.mp3; do
+    echo "file is $file"
+    if [ -e "$file" ]; then
+      base_name_of_file=`basename "$file" .mp3`
+      out_file="$TMP_DIR/${base_name_of_file}.mp3"
+      target_file="$TARGET_DIR/${base_name_of_file}.mp3"
+      cp "$file" "$out_file"
+      ${HOME}/Repos/music_management/cp_id3_tags "$file" "$out_file"
+    else
+      echo >&2 "No such file: "$1""
+      popd
+      exit 1
+    fi
+  done
+  ${HOME}/Repos/music_management/apply_replay_gain "$TMP_DIR"
+  rsync -av $TMP_DIR/*.mp3 "$TARGET_DIR"
+  rm $TMP_DIR/*.mp3
+else
+  echo >&2 "Usage: "$(basename "$0")" INPUTFILE [...]"
+  exit 1
+fi

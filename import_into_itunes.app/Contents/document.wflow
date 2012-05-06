@@ -60,7 +60,13 @@
 				<dict>
 					<key>COMMAND_STRING</key>
 					<string>PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"
-${HOME}/Repos/music_management/flac2mp3 "$1" &amp;&gt; /tmp/out</string>
+if [ `ls -1 "$1" | egrep -c \.mp3$` -ne 0 ]; then
+	${HOME}/Repos/music_management/mp32mp3 "$1" &amp;&gt; /tmp/out
+fi
+
+if [ `ls -1 "$1" | egrep -c \.flac$` -ne 0 ]; then
+	${HOME}/Repos/music_management/flac2mp3 "$1" &amp;&gt; /tmp/out
+fi</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
@@ -170,8 +176,6 @@ ${HOME}/Repos/music_management/flac2mp3 "$1" &amp;&gt; /tmp/out</string>
 						<string>4</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>

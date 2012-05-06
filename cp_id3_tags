@@ -13,8 +13,10 @@ dest_id3.delete()
 dest = MP3(sys.argv[2])
 dest.add_tags(ID3=EasyID3)
 
-source = FLAC(sys.argv[1])
-#id3 = EasyID3(sys.argv[1])
+if sys.argv[1].split(".")[1] == "flac":
+  source = FLAC(sys.argv[1])
+else:
+  source = MP3(sys.argv[1])
 
 dest.delete()
 
